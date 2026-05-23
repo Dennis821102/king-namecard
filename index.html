@@ -551,7 +551,7 @@
 
     async function initLiff() {
       try {
-        if (LIFF_ID === '2010175345-eDPVQtSp') {
+        if (!LIFF_ID || LIFF_ID.includes('YOUR_LIFF')) {
           setStatus('請先設定 LIFF ID（見下方教學）', 'error');
           btnShare.textContent = '尚未設定 LIFF ID';
           return;
