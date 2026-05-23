@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分享名片 - 玄璽科技資訊</title>
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1423;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card-preview {
+      background: #161c2d;
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .avatar-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #3b82f6;
+      margin: 0 auto 16px;
+      overflow: hidden;
+      background: #1a2035;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar-ring img {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .name { font-size: 28px; font-weight: bold; margin-bottom: 4px; }
+    .eng-name { font-size: 16px; color: #64748b; margin-bottom: 12px; }
+    .company-tag {
+      display: inline-block;
+      background: #1e2a4a;
+      color: #60a5fa;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 14px;
+    }
+    .btn-share {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 48px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      max-width: 340px;
+      transition: background 0.2s;
+    }
+    .btn-share:hover { background: #2563eb; }
+    .btn-share:disabled {
+      background: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+    .status {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #64748b;
+      text-align: center;
+      min-height: 20px;
+    }
+    .status.error { color: #f87171; }
+    .status.success { color: #4ade80; }
+  </style>
+</head>
+<body>
+  <div class="card-preview">
+    <div class="avatar-ring">
+      <img src="https://iili.io/CHvyLge.jpg" alt="King">
+    </div>
+    <div class="name">周袁德</div>
+    <div class="eng-name">King</div>
+    <div class="company-tag">玄璽科技資訊</div>
+  </div>
+
+  <button class="btn-share" id="btnShare" disabled>載入中...</button>
+  <div class="status" id="status"></div>
+
+  <script>
+    // =============================================
+    // 請將下方 LIFF_ID 替換為你的 LIFF ID
+    // =============================================
+    const LIFF_ID = 'YOUR_LIFF_ID_HERE';
+
+    const flexMessage = {
+      type: 'flex',
+      altText: '周袁德 King - 玄璽科技資訊 名片',
+      contents: {
+        "type": "carousel",
+        "contents": [
+          {
+            "type": "bubble",
+            "size": "mega",
+            "styles": {
+              "body": { "backgroundColor": "#0f1423" },
+              "footer": { "backgroundColor": "#0f1423" }
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "image",
+                          "url": "https://iili.io/CHvyLge.jpg",
+                          "size": "full",
+                          "aspectRatio": "1:1",
+                          "aspectMode": "cover"
+                        }
+                      ],
+                      "width": "120px",
+                      "height": "120px",
+                      "cornerRadius": "60px"
+                    }
+                  ],
+                  "width": "128px",
+                  "height": "128px",
+                  "cornerRadius": "64px",
+                  "borderWidth": "3px",
+                  "borderColor": "#3b82f6",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "backgroundColor": "#161c2d"
+                },
+                {
+                  "type": "text",
+                  "text": "周袁德",
+                  "size": "3xl",
+                  "weight": "bold",
+                  "color": "#f1f5f9",
+                  "align": "center",
+                  "margin": "xl"
+                },
+                {
+                  "type": "text",
+                  "text": "King",
+                  "size": "lg",
+                  "color": "#64748b",
+                  "align": "center",
+                  "margin": "sm"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "玄璽科技資訊",
+                      "size": "sm",
+                      "color": "#60a5fa",
+                      "align": "center",
+                      "weight": "bold"
+                    }
+                  ],
+                  "backgroundColor": "#1e2a4a",
+                  "cornerRadius": "14px",
+                  "paddingAll": "8px",
+                  "width": "130px",
+                  "margin": "lg"
+                },
+                {
+                  "type": "separator",
+                  "margin": "xl",
+                  "color": "#1e293b"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "電話",
+                          "size": "sm",
+                          "color": "#475569"
+                        },
+                        {
+                          "type": "text",
+                          "text": "0910-544-606",
+                          "size": "xl",
+                          "color": "#e2e8f0",
+                          "weight": "bold",
+                          "margin": "sm"
+                        }
+                      ]
+                    }
+                  ],
+                  "margin": "xl",
+                  "action": {
+                    "type": "uri",
+                    "label": "撥號",
+                    "uri": "tel:0910544606"
+                  }
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "LINE",
+                          "size": "sm",
+                          "color": "#475569"
+                        },
+                        {
+                          "type": "text",
+                          "text": "at821010",
+                          "size": "xl",
+                          "color": "#e2e8f0",
+                          "weight": "bold",
+                          "margin": "sm"
+                        }
+                      ]
+                    }
+                  ],
+                  "margin": "lg",
+                  "action": {
+                    "type": "uri",
+                    "label": "加LINE",
+                    "uri": "https://line.me/ti/p/~at821010"
+                  }
+                }
+              ],
+              "paddingAll": "24px",
+              "alignItems": "center"
+            },
+            "footer": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "撥號",
+                    "uri": "tel:0910544606"
+                  },
+                  "style": "primary",
+                  "color": "#1e40af",
+                  "height": "sm"
+                },
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "加 LINE",
+                    "uri": "https://line.me/ti/p/~at821010"
+                  },
+                  "style": "primary",
+                  "color": "#15803d",
+                  "height": "sm"
+                }
+              ],
+              "spacing": "md",
+              "paddingAll": "16px"
+            }
+          },
+          {
+            "type": "bubble",
+            "size": "mega",
+            "styles": {
+              "header": { "backgroundColor": "#0f1423" },
+              "body": { "backgroundColor": "#0f1423" },
+              "footer": { "backgroundColor": "#0f1423" }
+            },
+            "header": {
+              "type": "box",
+              "layout": "horizontal",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "image",
+                      "url": "https://iili.io/CH89Fdg.jpg",
+                      "size": "full",
+                      "aspectRatio": "1:1",
+                      "aspectMode": "cover"
+                    }
+                  ],
+                  "width": "60px",
+                  "height": "60px",
+                  "cornerRadius": "14px",
+                  "backgroundColor": "#ffffff",
+                  "paddingAll": "2px"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "玄璽科技資訊",
+                      "size": "xl",
+                      "weight": "bold",
+                      "color": "#f1f5f9"
+                    },
+                    {
+                      "type": "text",
+                      "text": "SEAL TECH INNOVATIONS",
+                      "size": "xs",
+                      "color": "#475569",
+                      "margin": "sm"
+                    }
+                  ],
+                  "justifyContent": "center"
+                }
+              ],
+              "spacing": "lg",
+              "paddingAll": "24px",
+              "alignItems": "center"
+            },
+            "body": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "服務項目",
+                  "size": "md",
+                  "color": "#64748b",
+                  "weight": "bold",
+                  "margin": "none"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "無人點餐",
+                          "size": "md",
+                          "color": "#cbd5e1",
+                          "weight": "bold",
+                          "align": "center"
+                        }
+                      ],
+                      "backgroundColor": "#1a2035",
+                      "cornerRadius": "12px",
+                      "paddingAll": "18px",
+                      "flex": 1,
+                      "borderColor": "#1e293b",
+                      "borderWidth": "1px",
+                      "justifyContent": "center",
+                      "alignItems": "center"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "預約系統",
+                          "size": "md",
+                          "color": "#cbd5e1",
+                          "weight": "bold",
+                          "align": "center"
+                        }
+                      ],
+                      "backgroundColor": "#1a2035",
+                      "cornerRadius": "12px",
+                      "paddingAll": "18px",
+                      "flex": 1,
+                      "borderColor": "#1e293b",
+                      "borderWidth": "1px",
+                      "justifyContent": "center",
+                      "alignItems": "center"
+                    }
+                  ],
+                  "spacing": "sm",
+                  "margin": "lg"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "官網設計",
+                          "size": "md",
+                          "color": "#cbd5e1",
+                          "weight": "bold",
+                          "align": "center"
+                        }
+                      ],
+                      "backgroundColor": "#1a2035",
+                      "cornerRadius": "12px",
+                      "paddingAll": "18px",
+                      "flex": 1,
+                      "borderColor": "#1e293b",
+                      "borderWidth": "1px",
+                      "justifyContent": "center",
+                      "alignItems": "center"
+                    },
+                    {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "客製化軟體",
+                          "size": "md",
+                          "color": "#cbd5e1",
+                          "weight": "bold",
+                          "align": "center"
+                        }
+                      ],
+                      "backgroundColor": "#1a2035",
+                      "cornerRadius": "12px",
+                      "paddingAll": "18px",
+                      "flex": 1,
+                      "borderColor": "#1e293b",
+                      "borderWidth": "1px",
+                      "justifyContent": "center",
+                      "alignItems": "center"
+                    }
+                  ],
+                  "spacing": "sm",
+                  "margin": "sm"
+                }
+              ],
+              "paddingAll": "24px"
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "瀏覽官網",
+                    "uri": "https://www.sealtech.asia/"
+                  },
+                  "style": "primary",
+                  "color": "#312e81",
+                  "height": "sm"
+                },
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "網頁模板",
+                    "uri": "https://www.sealtech.asia/web-templates/index.html"
+                  },
+                  "style": "primary",
+                  "color": "#1e293b",
+                  "height": "sm",
+                  "margin": "sm"
+                },
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "預約系統",
+                    "uri": "https://www.sealtech.asia/line-butler.html"
+                  },
+                  "style": "primary",
+                  "color": "#1e293b",
+                  "height": "sm",
+                  "margin": "sm"
+                },
+                {
+                  "type": "button",
+                  "action": {
+                    "type": "uri",
+                    "label": "無人點餐系統",
+                    "uri": "https://www.sealtech.asia/smart-restaurant.html"
+                  },
+                  "style": "primary",
+                  "color": "#1e293b",
+                  "height": "sm",
+                  "margin": "sm"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "SEAL THE FUTURE",
+                      "size": "xs",
+                      "color": "#334155",
+                      "align": "center"
+                    }
+                  ],
+                  "margin": "lg"
+                }
+              ],
+              "paddingAll": "16px"
+            }
+          }
+        ]
+      }
+    };
+
+    const btnShare = document.getElementById('btnShare');
+    const statusEl = document.getElementById('status');
+
+    function setStatus(msg, type) {
+      statusEl.textContent = msg;
+      statusEl.className = 'status' + (type ? ' ' + type : '');
+    }
+
+    async function initLiff() {
+      try {
+        if (LIFF_ID === 'YOUR_LIFF_ID_HERE') {
+          setStatus('請先設定 LIFF ID（見下方教學）', 'error');
+          btnShare.textContent = '尚未設定 LIFF ID';
+          return;
+        }
+
+        setStatus('正在初始化 LIFF...');
+        await liff.init({ liffId: LIFF_ID });
+
+        if (!liff.isLoggedIn()) {
+          setStatus('正在導向 LINE 登入...');
+          liff.login();
+          return;
+        }
+
+        if (!liff.isApiAvailable('shareTargetPicker')) {
+          setStatus('此環境不支援分享功能，請在 LINE App 內開啟此頁面', 'error');
+          return;
+        }
+
+        btnShare.disabled = false;
+        btnShare.textContent = '分享名片給好友';
+        setStatus('已登入，點擊按鈕選擇分享對象');
+      } catch (err) {
+        setStatus('LIFF 初始化失敗: ' + err.message, 'error');
+      }
+    }
+
+    btnShare.addEventListener('click', async () => {
+      try {
+        btnShare.disabled = true;
+        btnShare.textContent = '傳送中...';
+        setStatus('正在開啟分享選擇...');
+
+        const result = await liff.shareTargetPicker([flexMessage]);
+
+        if (result) {
+          setStatus('名片已成功傳送！', 'success');
+          btnShare.textContent = '再分享一次';
+        } else {
+          setStatus('已取消分享');
+          btnShare.textContent = '分享名片給好友';
+        }
+      } catch (err) {
+        setStatus('傳送失敗: ' + err.message, 'error');
+        btnShare.textContent = '重新分享';
+      } finally {
+        btnShare.disabled = false;
+      }
+    });
+
+    initLiff();
+  </script>
+</body>
+</html>
