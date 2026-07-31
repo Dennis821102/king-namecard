@@ -9,8 +9,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f1423;
-      color: #f1f5f9;
+      background: #FC9000;
+      color: #ffffff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -19,8 +19,8 @@
       padding: 24px;
     }
     .card-preview {
-      background: #161c2d;
-      border: 1px solid #1e293b;
+      background: #E88500;
+      border: 1px solid #D07000;
       border-radius: 20px;
       padding: 32px 24px;
       max-width: 340px;
@@ -32,10 +32,10 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 3px solid #FC9000;
+      border: 3px solid #ffffff;
       margin: 0 auto 16px;
       overflow: hidden;
-      background: #1a2035;
+      background: #E88500;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -46,19 +46,19 @@
       border-radius: 50%;
       object-fit: cover;
     }
-    .name { font-size: 28px; font-weight: bold; margin-bottom: 4px; }
-    .eng-name { font-size: 16px; color: #64748b; margin-bottom: 12px; }
+    .name { font-size: 28px; font-weight: bold; margin-bottom: 4px; color: #ffffff; }
+    .eng-name { font-size: 16px; color: #ffffffcc; margin-bottom: 12px; }
     .company-tag {
       display: inline-block;
-      background: #2d1a06;
-      color: #FC9000;
+      background: #ffffff;
+      color: #AB2702;
       font-size: 14px;
       font-weight: bold;
       padding: 6px 16px;
       border-radius: 14px;
     }
     .btn-share {
-      background: #FC9000;
+      background: #AB2702;
       color: #fff;
       border: none;
       border-radius: 14px;
@@ -70,21 +70,21 @@
       max-width: 340px;
       transition: background 0.2s;
     }
-    .btn-share:hover { background: #D04A11; }
+    .btn-share:hover { background: #8B1F01; }
     .btn-share:disabled {
-      background: #334155;
-      color: #64748b;
+      background: #D07000;
+      color: #ffffffaa;
       cursor: not-allowed;
     }
     .status {
       margin-top: 16px;
       font-size: 14px;
-      color: #64748b;
+      color: #ffffffcc;
       text-align: center;
       min-height: 20px;
     }
-    .status.error { color: #f87171; }
-    .status.success { color: #4ade80; }
+    .status.error { color: #7f1d1d; }
+    .status.success { color: #166534; }
   </style>
 </head>
 <body>
@@ -116,8 +116,8 @@
             "type": "bubble",
             "size": "mega",
             "styles": {
-              "body": { "backgroundColor": "#0f1423" },
-              "footer": { "backgroundColor": "#0f1423" }
+              "body": { "backgroundColor": "#FC9000" },
+              "footer": { "backgroundColor": "#FC9000" }
             },
             "body": {
               "type": "box",
@@ -148,17 +148,17 @@
                   "height": "128px",
                   "cornerRadius": "64px",
                   "borderWidth": "3px",
-                  "borderColor": "#FC9000",
+                  "borderColor": "#ffffff",
                   "justifyContent": "center",
                   "alignItems": "center",
-                  "backgroundColor": "#161c2d"
+                  "backgroundColor": "#E88500"
                 },
                 {
                   "type": "text",
                   "text": "周袁德",
                   "size": "3xl",
                   "weight": "bold",
-                  "color": "#f1f5f9",
+                  "color": "#ffffff",
                   "align": "center",
                   "margin": "xl"
                 },
@@ -166,7 +166,7 @@
                   "type": "text",
                   "text": "King",
                   "size": "lg",
-                  "color": "#64748b",
+                  "color": "#ffffffcc",
                   "align": "center",
                   "margin": "sm"
                 },
@@ -178,12 +178,12 @@
                       "type": "text",
                       "text": "依燃軟體",
                       "size": "sm",
-                      "color": "#FC9000",
+                      "color": "#AB2702",
                       "align": "center",
                       "weight": "bold"
                     }
                   ],
-                  "backgroundColor": "#2d1a06",
+                  "backgroundColor": "#ffffff",
                   "cornerRadius": "14px",
                   "paddingAll": "8px",
                   "width": "110px",
@@ -192,7 +192,7 @@
                 {
                   "type": "separator",
                   "margin": "xl",
-                  "color": "#1e293b"
+                  "color": "#D07000"
                 },
                 {
                   "type": "box",
@@ -206,13 +206,13 @@
                           "type": "text",
                           "text": "電話",
                           "size": "sm",
-                          "color": "#475569"
+                          "color": "#ffffffaa"
                         },
                         {
                           "type": "text",
                           "text": "0910-544-606",
                           "size": "xl",
-                          "color": "#e2e8f0",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "margin": "sm"
                         }
@@ -238,13 +238,13 @@
                           "type": "text",
                           "text": "LINE",
                           "size": "sm",
-                          "color": "#475569"
+                          "color": "#ffffffaa"
                         },
                         {
                           "type": "text",
                           "text": "at821010",
                           "size": "xl",
-                          "color": "#e2e8f0",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "margin": "sm"
                         }
@@ -274,7 +274,7 @@
                     "uri": "tel:0910544606"
                   },
                   "style": "primary",
-                  "color": "#D04A11",
+                  "color": "#AB2702",
                   "height": "sm"
                 },
                 {
@@ -297,9 +297,9 @@
             "type": "bubble",
             "size": "mega",
             "styles": {
-              "header": { "backgroundColor": "#0f1423" },
-              "body": { "backgroundColor": "#0f1423" },
-              "footer": { "backgroundColor": "#0f1423" }
+              "header": { "backgroundColor": "#FC9000" },
+              "body": { "backgroundColor": "#FC9000" },
+              "footer": { "backgroundColor": "#FC9000" }
             },
             "header": {
               "type": "box",
@@ -332,13 +332,13 @@
                       "text": "依燃軟體",
                       "size": "xl",
                       "weight": "bold",
-                      "color": "#f1f5f9"
+                      "color": "#ffffff"
                     },
                     {
                       "type": "text",
                       "text": "EVERAN SOFTWARE",
                       "size": "xs",
-                      "color": "#475569",
+                      "color": "#ffffffcc",
                       "margin": "sm"
                     }
                   ],
@@ -357,7 +357,7 @@
                   "type": "text",
                   "text": "服務項目",
                   "size": "md",
-                  "color": "#64748b",
+                  "color": "#ffffffcc",
                   "weight": "bold",
                   "margin": "none"
                 },
@@ -373,16 +373,16 @@
                           "type": "text",
                           "text": "網站設計與整合",
                           "size": "sm",
-                          "color": "#cbd5e1",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "align": "center"
                         }
                       ],
-                      "backgroundColor": "#1a2035",
+                      "backgroundColor": "#E88500",
                       "cornerRadius": "12px",
                       "paddingAll": "18px",
                       "flex": 1,
-                      "borderColor": "#1e293b",
+                      "borderColor": "#D07000",
                       "borderWidth": "1px",
                       "justifyContent": "center",
                       "alignItems": "center"
@@ -395,16 +395,16 @@
                           "type": "text",
                           "text": "預約+雲端櫃台",
                           "size": "sm",
-                          "color": "#cbd5e1",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "align": "center"
                         }
                       ],
-                      "backgroundColor": "#1a2035",
+                      "backgroundColor": "#E88500",
                       "cornerRadius": "12px",
                       "paddingAll": "18px",
                       "flex": 1,
-                      "borderColor": "#1e293b",
+                      "borderColor": "#D07000",
                       "borderWidth": "1px",
                       "justifyContent": "center",
                       "alignItems": "center"
@@ -425,16 +425,16 @@
                           "type": "text",
                           "text": "POS+掃碼點餐",
                           "size": "sm",
-                          "color": "#cbd5e1",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "align": "center"
                         }
                       ],
-                      "backgroundColor": "#1a2035",
+                      "backgroundColor": "#E88500",
                       "cornerRadius": "12px",
                       "paddingAll": "18px",
                       "flex": 1,
-                      "borderColor": "#1e293b",
+                      "borderColor": "#D07000",
                       "borderWidth": "1px",
                       "justifyContent": "center",
                       "alignItems": "center"
@@ -447,16 +447,16 @@
                           "type": "text",
                           "text": "客製化軟體",
                           "size": "sm",
-                          "color": "#cbd5e1",
+                          "color": "#ffffff",
                           "weight": "bold",
                           "align": "center"
                         }
                       ],
-                      "backgroundColor": "#1a2035",
+                      "backgroundColor": "#E88500",
                       "cornerRadius": "12px",
                       "paddingAll": "18px",
                       "flex": 1,
-                      "borderColor": "#1e293b",
+                      "borderColor": "#D07000",
                       "borderWidth": "1px",
                       "justifyContent": "center",
                       "alignItems": "center"
@@ -480,7 +480,7 @@
                     "uri": "https://everan-sw.com/"
                   },
                   "style": "primary",
-                  "color": "#D04A11",
+                  "color": "#AB2702",
                   "height": "sm"
                 },
                 {
@@ -491,7 +491,7 @@
                       "type": "text",
                       "text": "EVERAN SOFTWARE",
                       "size": "xs",
-                      "color": "#334155",
+                      "color": "#ffffffaa",
                       "align": "center"
                     }
                   ],
