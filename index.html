@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>分享名片 - 玄璽科技資訊</title>
+  <title>分享名片 - 依燃軟體</title>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +32,7 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 3px solid #3b82f6;
+      border: 3px solid #FC9000;
       margin: 0 auto 16px;
       overflow: hidden;
       background: #1a2035;
@@ -50,15 +50,15 @@
     .eng-name { font-size: 16px; color: #64748b; margin-bottom: 12px; }
     .company-tag {
       display: inline-block;
-      background: #1e2a4a;
-      color: #60a5fa;
+      background: #2d1a06;
+      color: #FC9000;
       font-size: 14px;
       font-weight: bold;
       padding: 6px 16px;
       border-radius: 14px;
     }
     .btn-share {
-      background: #3b82f6;
+      background: #FC9000;
       color: #fff;
       border: none;
       border-radius: 14px;
@@ -70,7 +70,7 @@
       max-width: 340px;
       transition: background 0.2s;
     }
-    .btn-share:hover { background: #2563eb; }
+    .btn-share:hover { background: #D04A11; }
     .btn-share:disabled {
       background: #334155;
       color: #64748b;
@@ -94,7 +94,7 @@
     </div>
     <div class="name">周袁德</div>
     <div class="eng-name">King</div>
-    <div class="company-tag">玄璽科技資訊</div>
+    <div class="company-tag">依燃軟體</div>
   </div>
 
   <button class="btn-share" id="btnShare" disabled>載入中...</button>
@@ -108,7 +108,7 @@
 
     const flexMessage = {
       type: 'flex',
-      altText: '周袁德 King - 玄璽科技資訊 名片',
+      altText: '周袁德 King - 依燃軟體 名片',
       contents: {
         "type": "carousel",
         "contents": [
@@ -148,7 +148,7 @@
                   "height": "128px",
                   "cornerRadius": "64px",
                   "borderWidth": "3px",
-                  "borderColor": "#3b82f6",
+                  "borderColor": "#FC9000",
                   "justifyContent": "center",
                   "alignItems": "center",
                   "backgroundColor": "#161c2d"
@@ -176,17 +176,17 @@
                   "contents": [
                     {
                       "type": "text",
-                      "text": "玄璽科技資訊",
+                      "text": "依燃軟體",
                       "size": "sm",
-                      "color": "#60a5fa",
+                      "color": "#FC9000",
                       "align": "center",
                       "weight": "bold"
                     }
                   ],
-                  "backgroundColor": "#1e2a4a",
+                  "backgroundColor": "#2d1a06",
                   "cornerRadius": "14px",
                   "paddingAll": "8px",
-                  "width": "130px",
+                  "width": "110px",
                   "margin": "lg"
                 },
                 {
@@ -274,7 +274,7 @@
                     "uri": "tel:0910544606"
                   },
                   "style": "primary",
-                  "color": "#1e40af",
+                  "color": "#D04A11",
                   "height": "sm"
                 },
                 {
@@ -311,7 +311,7 @@
                   "contents": [
                     {
                       "type": "image",
-                      "url": "https://iili.io/CH89Fdg.jpg",
+                      "url": "https://raw.githubusercontent.com/Dennis821102/king-namecard/main/everan-logo.png",
                       "size": "full",
                       "aspectRatio": "1:1",
                       "aspectMode": "cover"
@@ -329,14 +329,14 @@
                   "contents": [
                     {
                       "type": "text",
-                      "text": "玄璽科技資訊",
+                      "text": "依燃軟體",
                       "size": "xl",
                       "weight": "bold",
                       "color": "#f1f5f9"
                     },
                     {
                       "type": "text",
-                      "text": "SEAL TECH INNOVATIONS",
+                      "text": "EVERAN SOFTWARE",
                       "size": "xs",
                       "color": "#475569",
                       "margin": "sm"
@@ -371,8 +371,8 @@
                       "contents": [
                         {
                           "type": "text",
-                          "text": "無人點餐",
-                          "size": "md",
+                          "text": "網站設計與整合",
+                          "size": "sm",
                           "color": "#cbd5e1",
                           "weight": "bold",
                           "align": "center"
@@ -393,8 +393,8 @@
                       "contents": [
                         {
                           "type": "text",
-                          "text": "預約系統",
-                          "size": "md",
+                          "text": "預約+雲端櫃台",
+                          "size": "sm",
                           "color": "#cbd5e1",
                           "weight": "bold",
                           "align": "center"
@@ -423,8 +423,8 @@
                       "contents": [
                         {
                           "type": "text",
-                          "text": "官網設計",
-                          "size": "md",
+                          "text": "POS+掃碼點餐",
+                          "size": "sm",
                           "color": "#cbd5e1",
                           "weight": "bold",
                           "align": "center"
@@ -446,7 +446,7 @@
                         {
                           "type": "text",
                           "text": "客製化軟體",
-                          "size": "md",
+                          "size": "sm",
                           "color": "#cbd5e1",
                           "weight": "bold",
                           "align": "center"
@@ -477,47 +477,11 @@
                   "action": {
                     "type": "uri",
                     "label": "瀏覽官網",
-                    "uri": "https://www.sealtech.asia/"
+                    "uri": "https://everan-sw.com/"
                   },
                   "style": "primary",
-                  "color": "#312e81",
+                  "color": "#D04A11",
                   "height": "sm"
-                },
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "網頁模板",
-                    "uri": "https://www.sealtech.asia/web-templates/index.html"
-                  },
-                  "style": "primary",
-                  "color": "#1e293b",
-                  "height": "sm",
-                  "margin": "sm"
-                },
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "預約系統",
-                    "uri": "https://www.sealtech.asia/line-butler.html"
-                  },
-                  "style": "primary",
-                  "color": "#1e293b",
-                  "height": "sm",
-                  "margin": "sm"
-                },
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "無人點餐系統",
-                    "uri": "https://www.sealtech.asia/smart-restaurant.html"
-                  },
-                  "style": "primary",
-                  "color": "#1e293b",
-                  "height": "sm",
-                  "margin": "sm"
                 },
                 {
                   "type": "box",
@@ -525,7 +489,7 @@
                   "contents": [
                     {
                       "type": "text",
-                      "text": "Seal Tech Innovation",
+                      "text": "EVERAN SOFTWARE",
                       "size": "xs",
                       "color": "#334155",
                       "align": "center"
