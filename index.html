@@ -7,103 +7,142 @@
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #FFF6EC;
+      --card: #FFFFFF;
+      --band: #8E3A10;
+      --band-sub: #F3D3BE;
+      --orange: #FC9000;
+      --rust: #CC4B12;
+      --ink: #3D2317;
+      --ink-dim: #8A7365;
+      --hair: #E7CFBB;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #FFE0C0;
-      color: #1a1a1a;
+      font-family: "PingFang TC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
+      padding: 24px 18px 40px;
     }
-    .card-preview {
-      background: #FFF0E0;
-      border: 1px solid #FFD9B3;
-      border-radius: 20px;
-      padding: 32px 24px;
-      max-width: 340px;
+
+    .card {
       width: 100%;
-      text-align: center;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .avatar-ring {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #FC9000;
-      margin: 0 auto 16px;
+      max-width: 340px;
+      background: var(--card);
+      border-radius: 18px;
       overflow: hidden;
-      background: #FFE0C0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      box-shadow: 0 10px 30px rgba(140, 80, 40, 0.14);
     }
-    .avatar-ring img {
+
+    /* 半身照 + 左上角 logo */
+    .photo { position: relative; line-height: 0; }
+    .photo > img.shot { width: 100%; display: block; }
+    .photo > img.logo {
+      position: absolute;
+      top: 14px; left: 14px;
       width: 92px;
-      height: 92px;
-      border-radius: 50%;
-      object-fit: cover;
     }
-    .name {
-      font-size: 28px; font-weight: bold; margin-bottom: 4px; color: #1a1a1a;
+    .tag {
+      position: absolute;
+      top: 112px; left: 16px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--hair);
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--rust);
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
-    .eng-name {
-      font-size: 16px; color: #666666; margin-bottom: 12px;
-    }
-    .company-tag {
-      display: inline-block;
-      background: #FC9000;
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 6px 16px;
-      border-radius: 14px;
-    }
-    .btn-share {
-      background: #FC9000;
+
+    /* 姓名色帶 */
+    .band {
+      background: var(--band);
       color: #fff;
-      border: none;
-      border-radius: 14px;
-      padding: 16px 48px;
-      font-size: 18px;
-      font-weight: bold;
+      padding: 16px 18px 18px;
+    }
+    .band .name {
+      font-size: 25px; font-weight: 700; letter-spacing: 0.06em;
+    }
+    .band .name em { font-style: normal; font-weight: 400; font-size: 20px; margin-left: 8px; }
+    .band .role {
+      margin-top: 6px;
+      font-size: 13px; color: var(--band-sub); letter-spacing: 0.03em;
+    }
+
+    /* 按鈕 */
+    .actions {
+      width: 100%; max-width: 340px;
+      margin-top: 14px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 15px 16px;
+      background: var(--card);
+      border: 1px solid var(--hair);
+      border-radius: 12px;
+      color: var(--ink);
+      font-size: 15px; font-weight: 600; letter-spacing: 0.04em;
+      text-decoration: none;
       cursor: pointer;
-      width: 100%;
-      max-width: 340px;
-      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(140, 80, 40, 0.06);
+      transition: border-color .18s, background .18s, color .18s;
     }
-    .btn-share:hover { background: #D07000; }
+    .btn:hover { border-color: var(--orange); color: var(--rust); }
+    .btn-share {
+      border-color: var(--orange);
+      color: var(--rust);
+      font-weight: 700;
+    }
+    .btn-share:hover { background: #FFF1E0; }
     .btn-share:disabled {
-      background: #e5e7eb;
-      color: #999999;
-      cursor: not-allowed;
+      background: #F3EDE7; border-color: #E4DAD1; color: #A79C93;
+      cursor: not-allowed; box-shadow: none;
     }
+
     .status {
-      margin-top: 16px;
-      font-size: 14px;
-      color: #999999;
-      text-align: center;
-      min-height: 20px;
+      max-width: 340px; width: 100%;
+      margin-top: 12px;
+      font-size: 13px; color: var(--ink-dim); text-align: center; min-height: 20px;
     }
-    .status.error { color: #dc2626; }
-    .status.success { color: #16a34a; }
+    .status.error { color: #C0392B; }
+    .status.success { color: #2E7D32; }
+
+    .foot {
+      margin-top: 20px;
+      font-size: 10px; letter-spacing: 0.3em; color: #C0AA99; text-indent: 0.3em;
+    }
   </style>
 </head>
 <body>
-  <div class="card-preview">
-    <div class="avatar-ring">
-      <img src="https://iili.io/CHvyLge.jpg" alt="King">
+  <div class="card">
+    <div class="photo">
+      <img class="shot" src="img/portrait.jpg" alt="周袁德 King">
+      <img class="logo" src="everan-logo.png" alt="依燃軟體">
+      <div class="tag">軟體開發<br>系統整合</div>
     </div>
-    <div class="name">周袁德</div>
-    <div class="eng-name">King</div>
-    <div class="company-tag">依燃軟體</div>
+    <div class="band">
+      <div class="name">周袁德<em>King</em></div>
+      <div class="role">創辦人 Founder ／ 依燃軟體</div>
+    </div>
   </div>
 
-  <button class="btn-share" id="btnShare" disabled>載入中...</button>
+  <div class="actions">
+    <a class="btn" href="tel:0910544606"><span>立即致電</span>📞</a>
+    <a class="btn" href="https://line.me/ti/p/~at821010" target="_blank" rel="noopener"><span>立即加 LINE 聊</span>💬</a>
+    <button class="btn btn-share" id="btnShare" disabled>載入中...</button>
+  </div>
+
   <div class="status" id="status"></div>
+  <div class="foot">EVERAN SOFTWARE</div>
 
   <script>
     // =============================================
@@ -111,433 +150,212 @@
     // =============================================
     const LIFF_ID = '2010175345-eDPVQtSp';
 
-    const flexMessage = {
-      type: 'flex',
-      altText: '周袁德 King - 依燃軟體 名片',
-      contents: {
-        "type": "carousel",
-        "contents": [
+    // Flex Message 的圖片必須是 https 絕對網址
+    const BASE = 'https://dennis821102.github.io/king-namecard';
+
+    const LINKS = {
+      tel:   'tel:0910544606',
+      line:  'https://line.me/ti/p/~at821010',
+      web:   'https://everan-sw.com/',
+      liff:  'https://liff.line.me/' + LIFF_ID
+    };
+
+    const BAND = '#8E3A10';
+    const CREAM = '#FFF6EC';
+    const RUST = '#CC4B12';
+    const ORANGE = '#FC9000';
+    const INK = '#3D2317';
+    const HAIR = '#E7CFBB';
+
+    // 白底描邊按鈕（Flex 的 button 元件不能設邊框，改用可點擊的 box）
+    function btn(label, uri) {
+      return {
+        type: 'box',
+        layout: 'vertical',
+        backgroundColor: '#FFFFFF',
+        borderColor: HAIR,
+        borderWidth: '1px',
+        cornerRadius: '10px',
+        paddingAll: '13px',
+        action: { type: 'uri', label: label, uri: uri },
+        contents: [
+          { type: 'text', text: label, size: 'sm', weight: 'bold', color: INK, align: 'center' }
+        ]
+      };
+    }
+
+    function bullet(text) {
+      return {
+        type: 'box',
+        layout: 'baseline',
+        spacing: 'sm',
+        contents: [
+          { type: 'text', text: '●', size: 'xxs', color: ORANGE, flex: 1 },
+          { type: 'text', text: text, size: 'sm', color: INK, flex: 12, wrap: true }
+        ]
+      };
+    }
+
+    // ---------- 第一張：半身照名片 ----------
+    const bubbleProfile = {
+      type: 'bubble',
+      size: 'mega',
+      styles: {
+        hero: { backgroundColor: '#FFFFFF' },
+        body: { backgroundColor: BAND },
+        footer: { backgroundColor: CREAM }
+      },
+      hero: {
+        type: 'box',
+        layout: 'vertical',
+        paddingAll: '0px',
+        contents: [
           {
-            "type": "bubble",
-            "size": "mega",
-            "styles": {
-              "body": { "backgroundColor": "#FFE0C0" },
-              "footer": { "backgroundColor": "#FFE0C0" }
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "image",
-                          "url": "https://iili.io/CHvyLge.jpg",
-                          "size": "full",
-                          "aspectRatio": "1:1",
-                          "aspectMode": "cover"
-                        }
-                      ],
-                      "width": "120px",
-                      "height": "120px",
-                      "cornerRadius": "60px"
-                    }
-                  ],
-                  "width": "128px",
-                  "height": "128px",
-                  "cornerRadius": "64px",
-                  "borderWidth": "3px",
-                  "borderColor": "#FC9000",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffff"
-                },
-                {
-                  "type": "text",
-                  "text": "周袁德",
-                  "size": "3xl",
-                  "weight": "bold",
-                  "color": "#1a1a1a",
-                  "align": "center",
-                  "margin": "xl"
-                },
-                {
-                  "type": "text",
-                  "text": "King",
-                  "size": "lg",
-                  "color": "#666666",
-                  "align": "center",
-                  "margin": "sm"
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "依燃軟體",
-                      "size": "sm",
-                      "color": "#ffffff",
-                      "align": "center",
-                      "weight": "bold"
-                    }
-                  ],
-                  "backgroundColor": "#FC9000",
-                  "cornerRadius": "14px",
-                  "paddingAll": "8px",
-                  "width": "110px",
-                  "margin": "lg"
-                },
-                {
-                  "type": "separator",
-                  "margin": "xl",
-                  "color": "#e5e7eb"
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "電話",
-                          "size": "sm",
-                          "color": "#999999"
-                        },
-                        {
-                          "type": "text",
-                          "text": "0910-544-606",
-                          "size": "xl",
-                          "color": "#1a1a1a",
-                          "weight": "bold",
-                          "margin": "sm"
-                        }
-                      ]
-                    }
-                  ],
-                  "margin": "xl",
-                  "action": {
-                    "type": "uri",
-                    "label": "撥號",
-                    "uri": "tel:0910544606"
-                  }
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "LINE",
-                          "size": "sm",
-                          "color": "#999999"
-                        },
-                        {
-                          "type": "text",
-                          "text": "at821010",
-                          "size": "xl",
-                          "color": "#1a1a1a",
-                          "weight": "bold",
-                          "margin": "sm"
-                        }
-                      ]
-                    }
-                  ],
-                  "margin": "lg",
-                  "action": {
-                    "type": "uri",
-                    "label": "加LINE",
-                    "uri": "https://line.me/ti/p/~at821010"
-                  }
-                }
-              ],
-              "paddingAll": "24px",
-              "alignItems": "center"
-            },
-            "footer": {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "撥號",
-                    "uri": "tel:0910544606"
-                  },
-                  "style": "primary",
-                  "color": "#FC9000",
-                  "height": "sm"
-                },
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "加 LINE",
-                    "uri": "https://line.me/ti/p/~at821010"
-                  },
-                  "style": "primary",
-                  "color": "#15803d",
-                  "height": "sm"
-                }
-              ],
-              "spacing": "md",
-              "paddingAll": "16px"
-            }
+            type: 'image',
+            url: BASE + '/img/portrait.jpg',
+            size: 'full',
+            aspectRatio: '4:5',
+            aspectMode: 'cover'
           },
           {
-            "type": "bubble",
-            "size": "mega",
-            "styles": {
-              "header": { "backgroundColor": "#FFE0C0" },
-              "body": { "backgroundColor": "#FFE0C0" },
-              "footer": { "backgroundColor": "#FFE0C0" }
-            },
-            "header": {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "image",
-                      "url": "https://raw.githubusercontent.com/Dennis821102/king-namecard/main/everan-logo.png",
-                      "size": "full",
-                      "aspectRatio": "1:1",
-                      "aspectMode": "cover"
-                    }
-                  ],
-                  "width": "60px",
-                  "height": "60px",
-                  "cornerRadius": "14px",
-                  "backgroundColor": "#ffffff",
-                  "paddingAll": "2px"
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "依燃軟體",
-                      "size": "xl",
-                      "weight": "bold",
-                      "color": "#1a1a1a"
-                    },
-                    {
-                      "type": "text",
-                      "text": "EVERAN SOFTWARE",
-                      "size": "xs",
-                      "color": "#999999",
-                      "margin": "sm"
-                    }
-                  ],
-                  "justifyContent": "center"
-                }
-              ],
-              "spacing": "lg",
-              "paddingAll": "24px",
-              "alignItems": "center"
-            },
-            "body": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "服務項目",
-                  "size": "md",
-                  "color": "#999999",
-                  "weight": "bold",
-                  "margin": "none"
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "網站設計與整合",
-                          "size": "sm",
-                          "color": "#333333",
-                          "weight": "bold",
-                          "align": "center",
-                          "wrap": true
-                        }
-                      ],
-                      "backgroundColor": "#ffffff",
-                      "cornerRadius": "12px",
-                      "paddingTop": "14px",
-                      "paddingBottom": "14px",
-                      "paddingStart": "6px",
-                      "paddingEnd": "6px",
-                      "flex": 1,
-                      "borderColor": "#FC9000",
-                      "borderWidth": "1px",
-                      "justifyContent": "center",
-                      "alignItems": "center"
-                    },
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "預約+雲端櫃台",
-                          "size": "sm",
-                          "color": "#333333",
-                          "weight": "bold",
-                          "align": "center",
-                          "wrap": true
-                        }
-                      ],
-                      "backgroundColor": "#ffffff",
-                      "cornerRadius": "12px",
-                      "paddingTop": "14px",
-                      "paddingBottom": "14px",
-                      "paddingStart": "6px",
-                      "paddingEnd": "6px",
-                      "flex": 1,
-                      "borderColor": "#FC9000",
-                      "borderWidth": "1px",
-                      "justifyContent": "center",
-                      "alignItems": "center"
-                    }
-                  ],
-                  "spacing": "sm",
-                  "margin": "lg"
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "POS+掃碼點餐",
-                          "size": "sm",
-                          "color": "#333333",
-                          "weight": "bold",
-                          "align": "center",
-                          "wrap": true
-                        }
-                      ],
-                      "backgroundColor": "#ffffff",
-                      "cornerRadius": "12px",
-                      "paddingTop": "14px",
-                      "paddingBottom": "14px",
-                      "paddingStart": "6px",
-                      "paddingEnd": "6px",
-                      "flex": 1,
-                      "borderColor": "#FC9000",
-                      "borderWidth": "1px",
-                      "justifyContent": "center",
-                      "alignItems": "center"
-                    },
-                    {
-                      "type": "box",
-                      "layout": "vertical",
-                      "contents": [
-                        {
-                          "type": "text",
-                          "text": "客製化軟體",
-                          "size": "sm",
-                          "color": "#333333",
-                          "weight": "bold",
-                          "align": "center",
-                          "wrap": true
-                        }
-                      ],
-                      "backgroundColor": "#ffffff",
-                      "cornerRadius": "12px",
-                      "paddingTop": "14px",
-                      "paddingBottom": "14px",
-                      "paddingStart": "6px",
-                      "paddingEnd": "6px",
-                      "flex": 1,
-                      "borderColor": "#FC9000",
-                      "borderWidth": "1px",
-                      "justifyContent": "center",
-                      "alignItems": "center"
-                    }
-                  ],
-                  "spacing": "sm",
-                  "margin": "sm"
-                }
-              ],
-              "paddingAll": "24px"
-            },
-            "footer": {
-              "type": "box",
-              "layout": "vertical",
-              "contents": [
-                {
-                  "type": "button",
-                  "action": {
-                    "type": "uri",
-                    "label": "瀏覽官網",
-                    "uri": "https://everan-sw.com/"
-                  },
-                  "style": "primary",
-                  "color": "#FC9000",
-                  "height": "sm"
-                },
-                {
-                  "type": "box",
-                  "layout": "horizontal",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "EVERAN SOFTWARE",
-                      "size": "xs",
-                      "color": "#999999",
-                      "align": "center"
-                    }
-                  ],
-                  "margin": "lg"
-                }
-              ],
-              "paddingAll": "16px"
-            }
+            type: 'box',
+            layout: 'vertical',
+            position: 'absolute',
+            offsetTop: '14px',
+            offsetStart: '14px',
+            width: '84px',
+            contents: [
+              { type: 'image', url: BASE + '/everan-logo.png', size: 'full', aspectMode: 'fit' }
+            ]
+          },
+          {
+            type: 'box',
+            layout: 'vertical',
+            position: 'absolute',
+            offsetTop: '106px',
+            offsetStart: '16px',
+            width: '72px',
+            backgroundColor: '#FFFFFFEE',
+            borderColor: HAIR,
+            borderWidth: '1px',
+            cornerRadius: '6px',
+            paddingAll: '6px',
+            contents: [
+              { type: 'text', text: '軟體開發', size: 'xxs', color: RUST, weight: 'bold', align: 'center' },
+              { type: 'text', text: '系統整合', size: 'xxs', color: RUST, weight: 'bold', align: 'center' }
+            ]
           }
+        ]
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        backgroundColor: BAND,
+        paddingAll: '18px',
+        spacing: 'xs',
+        contents: [
+          {
+            type: 'box',
+            layout: 'baseline',
+            spacing: 'sm',
+            contents: [
+              { type: 'text', text: '周袁德', size: 'xl', weight: 'bold', color: '#FFFFFF', flex: 0 },
+              { type: 'text', text: 'King', size: 'md', color: '#FFFFFF', flex: 0 }
+            ]
+          },
+          { type: 'text', text: '創辦人 Founder ／ 依燃軟體', size: 'xs', color: '#F3D3BE', margin: 'sm' }
+        ]
+      },
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        backgroundColor: CREAM,
+        spacing: 'sm',
+        paddingAll: '14px',
+        contents: [
+          btn('立即致電', LINKS.tel),
+          btn('立即加 LINE 聊', LINKS.line),
+          btn('分享我的電子名片', LINKS.liff)
         ]
       }
     };
 
+    // ---------- 第二張：品牌與服務 ----------
+    const bubbleBrand = {
+      type: 'bubble',
+      size: 'mega',
+      styles: {
+        body: { backgroundColor: CREAM },
+        footer: { backgroundColor: CREAM }
+      },
+      hero: {
+        type: 'image',
+        url: BASE + '/img/brand-hero.jpg',
+        size: 'full',
+        aspectRatio: '20:13',
+        aspectMode: 'cover'
+      },
+      body: {
+        type: 'box',
+        layout: 'vertical',
+        backgroundColor: CREAM,
+        paddingAll: '20px',
+        spacing: 'sm',
+        contents: [
+          { type: 'text', text: '「說得出來的流程', size: 'lg', weight: 'bold', color: RUST, align: 'center', wrap: true },
+          { type: 'text', text: '就做得出來的系統」', size: 'lg', weight: 'bold', color: RUST, align: 'center', wrap: true },
+          { type: 'text', text: '為你量身打造　把繁瑣的問題交給系統', size: 'xs', color: '#8A7365', align: 'center', margin: 'md', wrap: true },
+          { type: 'separator', color: HAIR, margin: 'lg' },
+          {
+            type: 'box',
+            layout: 'vertical',
+            margin: 'lg',
+            spacing: 'sm',
+            contents: [
+              bullet('網站設計與整合'),
+              bullet('預約排程＋雲端櫃台'),
+              bullet('POS 收單帳務＋掃碼點餐'),
+              bullet('客製化軟體開發')
+            ]
+          }
+        ]
+      },
+      footer: {
+        type: 'box',
+        layout: 'vertical',
+        backgroundColor: CREAM,
+        spacing: 'sm',
+        paddingAll: '14px',
+        contents: [
+          btn('依燃軟體官網', LINKS.web),
+          btn('加 LINE 諮詢', LINKS.line),
+          btn('立即致電', LINKS.tel)
+        ]
+      }
+    };
+
+    const flexMessage = {
+      type: 'flex',
+      altText: '周袁德 King - 依燃軟體 名片',
+      contents: {
+        type: 'carousel',
+        contents: [bubbleProfile, bubbleBrand]
+      }
+    };
+
+    // ---------- LIFF ----------
     const btnShare = document.getElementById('btnShare');
     const statusEl = document.getElementById('status');
 
     function setStatus(msg, type) {
-      statusEl.textContent = msg;
+      statusEl.textContent = msg || '';
       statusEl.className = 'status' + (type ? ' ' + type : '');
     }
 
-    async function initLiff() {
+    async function main() {
       try {
         if (!LIFF_ID || LIFF_ID.includes('YOUR_LIFF')) {
-          setStatus('請先設定 LIFF ID（見下方教學）', 'error');
+          setStatus('請先設定 LIFF ID', 'error');
           btnShare.textContent = '尚未設定 LIFF ID';
           return;
         }
@@ -546,48 +364,45 @@
         await liff.init({ liffId: LIFF_ID });
 
         if (!liff.isLoggedIn()) {
-          setStatus('正在導向 LINE 登入...');
+          setStatus('請先登入 LINE');
           liff.login();
           return;
         }
 
         if (!liff.isApiAvailable('shareTargetPicker')) {
-          setStatus('此環境不支援分享功能，請在 LINE App 內開啟此頁面', 'error');
+          setStatus('此環境不支援分享功能，請在 LINE App 內開啟', 'error');
+          btnShare.textContent = '請在 LINE 中開啟';
           return;
         }
 
         btnShare.disabled = false;
-        btnShare.textContent = '分享名片給好友';
-        setStatus('已登入，點擊按鈕選擇分享對象');
+        btnShare.textContent = '分享我的電子名片';
+        setStatus('');
       } catch (err) {
         setStatus('LIFF 初始化失敗: ' + err.message, 'error');
+        btnShare.textContent = '初始化失敗';
       }
     }
 
     btnShare.addEventListener('click', async () => {
       try {
         btnShare.disabled = true;
-        btnShare.textContent = '傳送中...';
-        setStatus('正在開啟分享選擇...');
-
+        setStatus('開啟分享清單...');
         const result = await liff.shareTargetPicker([flexMessage]);
-
         if (result) {
-          setStatus('名片已成功傳送！', 'success');
-          btnShare.textContent = '再分享一次';
+          setStatus('名片已送出', 'success');
         } else {
           setStatus('已取消分享');
-          btnShare.textContent = '分享名片給好友';
         }
       } catch (err) {
-        setStatus('傳送失敗: ' + err.message, 'error');
-        btnShare.textContent = '重新分享';
+        setStatus('分享失敗: ' + err.message, 'error');
       } finally {
         btnShare.disabled = false;
+        btnShare.textContent = '分享我的電子名片';
       }
     });
 
-    initLiff();
+    main();
   </script>
 </body>
 </html>
