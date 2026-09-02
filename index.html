@@ -46,20 +46,7 @@
     .photo > img.logo {
       position: absolute;
       top: 14px; left: 14px;
-      width: 92px;
-    }
-    .tag {
-      position: absolute;
-      top: 112px; left: 16px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--hair);
-      border-radius: 6px;
-      padding: 5px 9px;
-      font-size: 11px;
-      line-height: 1.5;
-      color: var(--rust);
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      width: 112px;
     }
 
     /* 姓名色帶 */
@@ -126,8 +113,7 @@
   <div class="card">
     <div class="photo">
       <img class="shot" src="img/portrait.jpg" alt="周袁德 King">
-      <img class="logo" src="everan-logo.png" alt="依燃軟體">
-      <div class="tag">軟體開發<br>系統整合</div>
+      <img class="logo" src="everan-logo-text.png" alt="EVERAN 依燃軟體有限公司">
     </div>
     <div class="band">
       <div class="name">周袁德<em>King</em></div>
@@ -214,7 +200,7 @@
             type: 'image',
             url: BASE + '/img/portrait.jpg',
             size: 'full',
-            aspectRatio: '4:5',
+            aspectRatio: '1:1',
             aspectMode: 'cover'
           },
           {
@@ -223,26 +209,9 @@
             position: 'absolute',
             offsetTop: '14px',
             offsetStart: '14px',
-            width: '84px',
+            width: '104px',
             contents: [
-              { type: 'image', url: BASE + '/everan-logo.png', size: 'full', aspectMode: 'fit' }
-            ]
-          },
-          {
-            type: 'box',
-            layout: 'vertical',
-            position: 'absolute',
-            offsetTop: '106px',
-            offsetStart: '16px',
-            width: '72px',
-            backgroundColor: '#FFFFFFEE',
-            borderColor: HAIR,
-            borderWidth: '1px',
-            cornerRadius: '6px',
-            paddingAll: '6px',
-            contents: [
-              { type: 'text', text: '軟體開發', size: 'xxs', color: RUST, weight: 'bold', align: 'center' },
-              { type: 'text', text: '系統整合', size: 'xxs', color: RUST, weight: 'bold', align: 'center' }
+              { type: 'image', url: BASE + '/everan-logo-text.png', size: 'full', aspectRatio: '739:567', aspectMode: 'fit' }
             ]
           }
         ]
